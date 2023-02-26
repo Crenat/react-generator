@@ -141,4 +141,4 @@ export default {}Module;\n",
     name
     );
     fs::write(&index_path, contents).expect("Failed to create index.ts file for module");
-  }
+}
