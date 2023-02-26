@@ -18,6 +18,9 @@ fn to_first_upper_letter(s: &str) -> String {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+    let flags: Vec<String> = args.iter().filter(|arg| arg.starts_with("-")).map(|arg| arg.to_string()).collect();
+
+    println!("Flags: {:?}", flags);
 
     if args.len() < 3 {
         println!("Usage: rg <type> <name>");
