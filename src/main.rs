@@ -1,7 +1,9 @@
 use std::env;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use toml::Value;
+
+mod utils;
 
 const CONFIG_FILE: &str = ".rgrc.toml";
 
@@ -10,28 +12,6 @@ const INDEX_CONTENTS: &str = "export default {};";
 
 // The names of the folders to create for a new module
 const MODULE_FOLDERS: &[&str] = &["api", "components", "hooks", "layouts", "pages"];
-
-fn to_first_upper_letter(s: &str) -> String {
-    let mut c = s.chars();
-    match c.next() {
-        None => String::new(),
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
-    }
-}
-
-fn join_strings_to_pathbuf(strings: &[&str]) -> PathBuf {
-    let mut path = PathBuf::new();
-    for s in strings {
-        path.push(s);
-    }
-    path
-}
-
-fn generate_path_string(root_folder: &str, dir: &str, name: &str) -> String {
-    let path = join_strings_to_pathbuf(&[root_folder, dir, name]).display().to_string();
-
-    path
-}
 
 const DEFAULT_CONFIG_CONTENTS: &str = r#"
 root_folder = "src"
@@ -91,10 +71,10 @@ fn main() {
 
 // Generate a new React component
 fn generate_component(name: &str, root_folder: &str) {
-    let path = generate_path_string(root_folder, "components", name);
+    let path = utils::utils::generate_path_string(root_folder, "components", name);
     let file_path = format!("{}/index.tsx", path);
 
-    let name_first_upper_letter = to_first_upper_letter(name);
+    let name_first_upper_letter = utils::utils::to_first_upper_letter(name);
 
     fs::create_dir_all(&path).expect("Failed to create folder for component");
 
@@ -118,10 +98,10 @@ export default {};",
 
 // Generate a new React layout
 fn generate_layout(name: &str, root_folder: &str) {
-    let path = generate_path_string(root_folder, "layouts", name);
+    let path = utils::utils::generate_path_string(root_folder, "layouts", name);
     let file_path = format!("{}/index.tsx", path);
 
-    let name_first_upper_letter = to_first_upper_letter(name);
+    let name_first_upper_letter = utils::utils::to_first_upper_letter(name);
 
     fs::create_dir_all(&path).expect("Failed to create folder for layout");
 
@@ -149,7 +129,7 @@ export default {};",
 
 // Generate a new React module
 fn generate_module(name: &str, root_folder: &str) {
-    let path = generate_path_string(root_folder, "modules", name);
+    let path = utils::utils::generate_path_string(root_folder, "modules", name);
     let index_path = format!("{}/index.ts", path);
 
     fs::create_dir_all(&path).expect("Failed to create folder for module");
@@ -162,7 +142,7 @@ fn generate_module(name: &str, root_folder: &str) {
         let full_path = format!("{}/{}", folder_name, name);
 
         let folder_path = Path::new(&full_path);
-        let folder_full_path = join_strings_to_pathbuf(&[root_folder, "modules", name, folder_name]).display().to_string();
+        let folder_full_path = utils::utils::join_strings_to_pathbuf(&[root_folder, "modules", name, folder_name]).display().to_string();
 
         let index_path = format!("{}/index.ts", folder_full_path);
 
