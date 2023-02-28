@@ -69,6 +69,14 @@ Usage: `rg <type> <name>`
   export default Users;
   ```
 
+  ## Config
+  You can create a `.rgrc.toml` file in the root of your project. You can specify the root folder for creating the folders that gonna be created by `react-generator`. For default React application this is a `src` folder, this is also the default value
+
+  ### Here is an example of `.rgrc.toml`
+  ```toml
+  root_folder = "."
+  ```
+
   In future there will be flags and `rc` file for preferences and your personalised templates
 
   `Crenat` <martsenyuk.yura@gmail.com>
