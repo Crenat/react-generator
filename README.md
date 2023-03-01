@@ -19,11 +19,13 @@ ___
 ## Usage
 `rg` - the root command for react-generator
 
-Usage: `rg <type> <name>`
+Usage: `rg <operation> <name>`
+
+Also you can create several elements at the same time in this way `rg <operation> <name> <name> <name> ...`
 
 ---
 
-### The list of types
+### The list of operations
 - `module` - generates the `modules` folder if it doesn't exist yet, in it generates an the following folders `api`, `components`, `hooks`, `layouts`, `pages`. Also the module has an `index.ts` file in witch there is the followind stub:
   ```typescript
   import * as api from './api';
@@ -77,6 +79,6 @@ Usage: `rg <type> <name>`
   root_folder = "."
   ```
 
-  In future there will be flags and `rc` file for preferences and your personalised templates
+  In future there will be flags and your personalised templates
 
   `Crenat` <martsenyuk.yura@gmail.com>
