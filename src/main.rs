@@ -49,23 +49,25 @@ fn main() {
         root_folder = ".".to_string();
     }
 
-    println!("{}", root_folder);
-
-    println!("Flags: {:?}", flags);
-
     if args.len() < 3 {
         println!("Usage: rg <operation> <name>");
         return;
     }
 
     let operation = &args[1];
-    let name = &args[2];
+    // let name = &args[2];
 
-    match operation.as_str() {
-        "component" => generate_component(name, &root_folder),
-        "layout" => generate_layout(name, &root_folder),
-        "module" => generate_module(name, &root_folder),
-        _ => println!("Unknown operation: {}", operation),
+    if args.len() > 2 {
+        // execute the operation for each extra argument too
+        for i in 2..args.len() {
+            let name = &args[i];
+            match operation.as_str() {
+                "component" => generate_component(name, &root_folder),
+                "layout" => generate_layout(name, &root_folder),
+                "module" => generate_module(name, &root_folder),
+                _ => println!("Unknown operation: {}", operation),
+            }
+        }
     }
 }
 
