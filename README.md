@@ -81,4 +81,6 @@ Also you can create several elements at the same time in this way `rg <operation
 
   In future there will be flags and your personalised templates
 
+  [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gbraad)
+
   `Crenat` <martsenyuk.yura@gmail.com>
